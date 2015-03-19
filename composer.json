@@ -1,0 +1,24 @@
+{
+  "require": {
+    "slim/slim": "2.2.*",
+    "simplepie/simplepie": "*",
+    "saltybeagle/savant3": "dev-master",
+    "j4mie/idiorm": "1.4.*",
+    "mf2/mf2": "0.2.*",
+    "barnabywalters/mf-cleaner": "0.*",
+    "indieauth/client": "0.1.*",
+    "pda/pheanstalk": "dev-master",
+    "mpratt/relativetime": ">=1.0"
+  },
+  "autoload": {
+    "files": [
+      "lib/Savant.php",
+      "lib/config.php",
+      "lib/helpers.php",
+      "lib/db_helpers.php",
+      "lib/mf2_feed_parser.php",
+      "lib/DeferredTask.php",
+      "lib/request.php"
+    ]
+  }
+}

@@ -1,0 +1,486 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "e97be02376b6b07beab7c771b815ca64",
+    "packages": [
+        {
+            "name": "barnabywalters/mf-cleaner",
+            "version": "v0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barnabywalters/php-mf-cleaner.git",
+                "reference": "ef6a16628db6e8aee2b4f8bb8093d18c24b74cd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barnabywalters/php-mf-cleaner/zipball/ef6a16628db6e8aee2b4f8bb8093d18c24b74cd4",
+                "reference": "ef6a16628db6e8aee2b4f8bb8093d18c24b74cd4",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php": ">=5.3",
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "mf2/mf2": "To parse microformats2 structures from (X)HTML"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/BarnabyWalters/Mf2/Functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barnaby Walters",
+                    "email": "barnaby@waterpigs.co.uk"
+                }
+            ],
+            "description": "Cleans up microformats2 array structures",
+            "time": "2014-10-06 23:11:15"
+        },
+        {
+            "name": "indieauth/client",
+            "version": "0.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/indieauth-client-php.git",
+                "reference": "f979f8ee0fc6daaa6a393e7afdac894000d09544"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/indieauth-client-php/zipball/f979f8ee0fc6daaa6a393e7afdac894000d09544",
+                "reference": "f979f8ee0fc6daaa6a393e7afdac894000d09544",
+                "shasum": ""
+            },
+            "require": {
+                "barnabywalters/mf-cleaner": "0.*",
+                "indieweb/link-rel-parser": "0.1.1",
+                "mf2/mf2": "0.2.*",
+                "php": ">5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "IndieAuth": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Parecki",
+                    "homepage": "http://aaronparecki.com"
+                }
+            ],
+            "description": "IndieAuth Client Library",
+            "time": "2014-10-06 07:37:10"
+        },
+        {
+            "name": "indieweb/link-rel-parser",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/link-rel-parser-php.git",
+                "reference": "9e0e635fd301a8b1da7bc181f651f029c531dbb6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/link-rel-parser-php/zipball/9e0e635fd301a8b1da7bc181f651f029c531dbb6",
+                "reference": "9e0e635fd301a8b1da7bc181f651f029c531dbb6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/IndieWeb/link_rel_parser.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Parecki",
+                    "homepage": "http://aaronparecki.com"
+                },
+                {
+                    "name": "Tantek Çelik",
+                    "homepage": "http://tantek.com"
+                }
+            ],
+            "description": "Parse rel values from HTTP headers",
+            "homepage": "https://github.com/indieweb/link-rel-parser-php",
+            "keywords": [
+                "http",
+                "indieweb",
+                "microformats2"
+            ],
+            "time": "2013-12-23 00:14:58"
+        },
+        {
+            "name": "j4mie/idiorm",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j4mie/idiorm.git",
+                "reference": "11e964157a6a2c6128a0546673ad5e99ac1a62cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j4mie/idiorm/zipball/11e964157a6a2c6128a0546673ad5e99ac1a62cd",
+                "reference": "11e964157a6a2c6128a0546673ad5e99ac1a62cd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "idiorm.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause",
+                "BSD-3-Clause",
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Holywell",
+                    "email": "treffynnon@php.net",
+                    "homepage": "http://simonholywell.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jamie Matthews",
+                    "email": "jamie.matthews@gmail.com",
+                    "homepage": "http://j4mie.org",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Durham Hale",
+                    "email": "me@durhamhale.com",
+                    "homepage": "http://durhamhale.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A lightweight nearly-zero-configuration object-relational mapper and fluent query builder for PHP5",
+            "homepage": "http://j4mie.github.com/idiormandparis",
+            "keywords": [
+                "idiorm",
+                "orm",
+                "query builder"
+            ],
+            "time": "2013-12-12 10:25:27"
+        },
+        {
+            "name": "mf2/mf2",
+            "version": "v0.2.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/indieweb/php-mf2.git",
+                "reference": "ad1ee037555be7f3b2ea1d99e063e56207cf2a1d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/indieweb/php-mf2/zipball/ad1ee037555be7f3b2ea1d99e063e56207cf2a1d",
+                "reference": "ad1ee037555be7f3b2ea1d99e063e56207cf2a1d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "barnabywalters/mf-cleaner": "To more easily handle the canonical data php-mf2 gives you"
+            },
+            "bin": [
+                "bin/fetch-mf2",
+                "bin/parse-mf2"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Mf2/Parser.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barnaby Walters",
+                    "homepage": "http://waterpigs.co.uk"
+                }
+            ],
+            "description": "A pure, generic microformats2 parser — makes HTML as easy to consume as a JSON API",
+            "keywords": [
+                "html",
+                "microformats",
+                "microformats 2",
+                "parser",
+                "semantic"
+            ],
+            "time": "2014-07-23 09:37:36"
+        },
+        {
+            "name": "mpratt/relativetime",
+            "version": "1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpratt/RelativeTime.git",
+                "reference": "01f5699947f21080bec439bbab63dfe39e2d3f3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpratt/RelativeTime/zipball/01f5699947f21080bec439bbab63dfe39e2d3f3f",
+                "reference": "01f5699947f21080bec439bbab63dfe39e2d3f3f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "RelativeTime": "Lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Pratt",
+                    "email": "pratt@hablarmierda.net",
+                    "homepage": "http://www.michael-pratt.com",
+                    "role": "Author/Developer"
+                }
+            ],
+            "description": "A library that calculates the time difference between two dates and returns the result in words (Example: 5 minutes ago or 5 Minutes left). The library supports other languages aswell like Spanish and German.",
+            "homepage": "https://github.com/mpratt/RelativeTime",
+            "keywords": [
+                "ago",
+                "date",
+                "future",
+                "interval",
+                "relative",
+                "time",
+                "time-ago"
+            ],
+            "time": "2015-01-17 18:39:31"
+        },
+        {
+            "name": "pda/pheanstalk",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pda/pheanstalk.git",
+                "reference": "eb6407431e09ddc1fe99ce40f61ee8d0e622cd22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pda/pheanstalk/zipball/eb6407431e09ddc1fe99ce40f61ee8d0e622cd22",
+                "reference": "eb6407431e09ddc1fe99ce40f61ee8d0e622cd22",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pheanstalk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Annesley",
+                    "email": "paul@annesley.cc",
+                    "homepage": "http://paul.annesley.cc/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP client for beanstalkd queue",
+            "homepage": "https://github.com/pda/pheanstalk",
+            "keywords": [
+                "beanstalkd"
+            ],
+            "time": "2015-03-08 22:40:31"
+        },
+        {
+            "name": "saltybeagle/savant3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/saltybeagle/Savant3.git",
+                "reference": "ebf4385bf44bec8c7a169571ac178f626017c466"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/saltybeagle/Savant3/zipball/ebf4385bf44bec8c7a169571ac178f626017c466",
+                "reference": "ebf4385bf44bec8c7a169571ac178f626017c466",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Savant3.php",
+                    "Savant3",
+                    "Savant3/resources"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Brett Bieber",
+                    "email": "brett.bieber@gmail.com"
+                }
+            ],
+            "description": "Savant3 template engine",
+            "time": "2014-01-07 17:10:32"
+        },
+        {
+            "name": "simplepie/simplepie",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simplepie/simplepie.git",
+                "reference": "ce53709778bc1e2e4deda1651b66e5081398d5cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/ce53709778bc1e2e4deda1651b66e5081398d5cc",
+                "reference": "ce53709778bc1e2e4deda1651b66e5081398d5cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SimplePie": "library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Parman",
+                    "homepage": "http://ryanparman.com/",
+                    "role": "Creator, alumnus developer"
+                },
+                {
+                    "name": "Geoffrey Sneddon",
+                    "homepage": "http://gsnedders.com/",
+                    "role": "Alumnus developer"
+                },
+                {
+                    "name": "Ryan McCue",
+                    "email": "me@ryanmccue.info",
+                    "homepage": "http://ryanmccue.info/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple Atom/RSS parsing library for PHP",
+            "homepage": "http://simplepie.org/",
+            "keywords": [
+                "atom",
+                "feeds",
+                "rss"
+            ],
+            "time": "2012-10-30 17:54:03"
+        },
+        {
+            "name": "slim/slim",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slimphp/Slim.git",
+                "reference": "b8181de1112a1e2f565b40158b621c34ded38053"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/b8181de1112a1e2f565b40158b621c34ded38053",
+                "reference": "b8181de1112a1e2f565b40158b621c34ded38053",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Slim": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Lockhart",
+                    "email": "info@joshlockhart.com",
+                    "homepage": "http://www.joshlockhart.com/"
+                }
+            ],
+            "description": "Slim Framework, a PHP micro framework",
+            "homepage": "http://github.com/codeguy/Slim",
+            "keywords": [
+                "microframework",
+                "rest",
+                "router"
+            ],
+            "time": "2012-12-13 02:15:50"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "saltybeagle/savant3": 20,
+        "pda/pheanstalk": 20
+    },
+    "prefer-stable": false,
+    "platform": [],
+    "platform-dev": []
+}
