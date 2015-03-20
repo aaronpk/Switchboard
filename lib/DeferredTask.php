@@ -5,7 +5,7 @@ class DeferredTask {
   public static function run() {
     global $pcntl_continue;
 
-    $tube = 'monocle-worker';
+    $tube = 'switchboard-worker';
     echo "PID " . posix_getpid() . " watching tube: " . $tube . "\n";
     bs()->watch($tube)->ignore('default');
 
@@ -29,7 +29,7 @@ class DeferredTask {
   }
 
   public static function run_once() {
-    $tube = 'monocle-worker';
+    $tube = 'switchboard-worker';
     echo "PID " . posix_getpid() . " watching tube: " . $tube . "\n";
     bs()->watch($tube)->ignore('default');
 
@@ -44,7 +44,7 @@ class DeferredTask {
     if(!is_array($args))
       $args = array($args);
 
-    bs()->putInTube('monocle-worker', 
+    bs()->putInTube('switchboard-worker', 
       json_encode(array('class'=>$class, 'method'=>$method, 'args'=>$args)),
       1024,    // priority
       $delay,  // delay

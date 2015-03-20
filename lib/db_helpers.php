@@ -41,3 +41,10 @@ function find_or_create($table, $where, $defaults, $autosave=false) {
   return $item;
 }
 
+function feed_from_url($url) {
+  return ORM::for_table('feeds')->where('feed_url', $url)->find_one();
+}
+
+function get_by_id($table, $id) {
+  return ORM::for_table($table)->where('id', $id)->find_one();
+}

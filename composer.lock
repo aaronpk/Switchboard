@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e97be02376b6b07beab7c771b815ca64",
+    "hash": "56d03ce1ea73dfa3bd0f68bf4a987844",
     "packages": [
         {
             "name": "barnabywalters/mf-cleaner",
@@ -48,16 +48,16 @@
         },
         {
             "name": "indieauth/client",
-            "version": "0.1.8",
+            "version": "0.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/indieweb/indieauth-client-php.git",
-                "reference": "f979f8ee0fc6daaa6a393e7afdac894000d09544"
+                "reference": "6f9303cb79de7f650018cb8a317798bd4bfc2fb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/indieweb/indieauth-client-php/zipball/f979f8ee0fc6daaa6a393e7afdac894000d09544",
-                "reference": "f979f8ee0fc6daaa6a393e7afdac894000d09544",
+                "url": "https://api.github.com/repos/indieweb/indieauth-client-php/zipball/6f9303cb79de7f650018cb8a317798bd4bfc2fb9",
+                "reference": "6f9303cb79de7f650018cb8a317798bd4bfc2fb9",
                 "shasum": ""
             },
             "require": {
@@ -83,7 +83,7 @@
                 }
             ],
             "description": "IndieAuth Client Library",
-            "time": "2014-10-06 07:37:10"
+            "time": "2015-03-18 20:00:10"
         },
         {
             "name": "indieweb/link-rel-parser",

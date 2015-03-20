@@ -18,6 +18,7 @@
       "lib/db_helpers.php",
       "lib/mf2_feed_parser.php",
       "lib/DeferredTask.php",
+      "lib/PushTask.php",
       "lib/request.php"
     ]
   }

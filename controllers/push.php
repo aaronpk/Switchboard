@@ -6,6 +6,21 @@ function push_error(&$app, $msg) {
   die();
 }
 
+///////////////////////////////////////////////////////////////
+// These are just test routes
+$app->get('/callback-success', function() use($app) {
+  $params = $app->request()->params();
+  $app->response()->status(200);
+  echo $params['hub_challenge'];
+});
+
+$app->get('/callback-fail', function() use($app) {
+  $params = $app->request()->params();
+  $app->response()->status(404);
+});
+///////////////////////////////////////////////////////////////
+
+
 $app->post('/', function() use($app) {
   $params = $app->request()->params();
 
@@ -24,40 +39,36 @@ $app->post('/', function() use($app) {
         push_error($app, 'Callback URL was invalid');
       }
 
-      // Make a HEAD request to the topic URL to check if it exists
-      $topic_head = request\get_head($topic);
-      if($topic_head) {
-        if(request\response_is($topic_head['status'], 2)) {
-          $app->response()->status(202);
-
-          // Find or create the feed given the topic URL
-          $feed = db\find_or_create('feeds', ['feed_url'=>$topic], [
-            'hash' => db\random_hash(),
-          ], true);
-
-          print_r($feed);
-
-          // Find or create the subscription for this callback URL and feed
-          $subscription = db\find_or_create('subscriptions', ['feed_id'=>$feed->id, 'callback_url'=>$callback], [
-            'hash' => db\random_hash(),
-          ]);
-          $subscription->date_requested = db\now();
-          $subscription->challenge = db\random_hash();
-          $subscription->save();
-
-
-
-
-
-          echo "The subscription request is being validated. Check the status here:\n";
-          echo Config::$base_url . '/subscription/' . $subscription->hash . "\n";
+      // If we've already seen the topic, assume it's valid and don't check it again
+      if(!db\feed_from_url($topic)) {
+        $topic_head = request\get_head($topic);
+        if($topic_head && !request\response_is($topic_head['status'], 2)) {
+          push_error($app, "The topic URL returned a " . $topic_head['status'] . " status code");
         } else {
-          $app->response()->status(400);
-          echo "The topic URL returned a " . $topic_head['status'] . " status code\n";
+          push_error($app, 'We tried to verify the topic URL exists but it didn\'t respond to a HEAD request.');
         }
-      } else {
-        push_error($app, 'There was a problem trying to verify the topic URL');
       }
+
+      // Find or create the feed given the topic URL
+      $feed = db\find_or_create('feeds', ['feed_url'=>$topic], [
+        'hash' => db\random_hash(),
+      ], true);
+
+      // Find or create the subscription for this callback URL and feed
+      $subscription = db\find_or_create('subscriptions', ['feed_id'=>$feed->id, 'callback_url'=>$callback], [
+        'hash' => db\random_hash()
+      ], true);
+      // Always set a new requested date and challenge
+      $subscription->date_requested = db\now();
+      $subscription->challenge = db\random_hash();
+      $subscription->save();
+
+      // Queue the worker to validate the subscription
+      DeferredTask::queue('PushTask', 'verify_subscription', $subscription->id);
+
+      $app->response()->status(202);
+      echo "The subscription request is being validated. Check the status here:\n";
+      echo Config::$base_url . '/subscription/' . $subscription->hash . "\n";
 
       break;
 
