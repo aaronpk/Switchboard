@@ -1,0 +1,130 @@
+body {
+  padding-top: 10px;
+  background: #fff;
+}
+
+body.logged-out {
+  background: white;
+}
+.logged-out .jumbotron {
+  background-color: #fffbeb;
+  border: 1px #fff2bc solid;
+}
+
+.header {
+  font-family:; "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #888;
+  border-bottom: 6px #ddd solid;
+  padding-bottom: 4px;
+}
+
+.narrow {
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;  
+}
+
+.footer {
+  padding: 0;
+  margin-top: 20px;
+  text-align: center;
+  color: #999;
+  background-color: #f9f9f9;
+  border-top: 1px #e5e5e5 solid;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer .nav {
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;  
+}
+
+.footer .credits {
+  padding: 20px;
+  font-size: 12px;
+}
+
+
+.jumbotron .tagline {
+  font-size: 23px;
+}
+.jumbotron p {
+  font-size: 18px;
+}
+
+
+/**
+ * Bootstrap callouts
+ */
+
+/* Base styles (regardless of theme) */
+.bs-callout {
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  border-left: 5px solid #eee;
+}
+.bs-callout h4 {
+  margin-top: 0;
+}
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+.bs-callout code,
+.bs-callout .highlight {
+  background-color: #fff;
+}
+ 
+/* Themes for different contexts */
+.bs-callout-danger {
+  background-color: #fcf2f2;
+  border-color: #dFb5b4;
+}
+
+.bs-callout-warning {
+  background-color: #fefbed;
+  border-color: #f1e7bc;
+}
+
+.bs-callout-info {
+  background-color: #f0f7fd;
+  border-color: #d0e3f0;
+}
+
+.bs-callout-success {
+  background-color: #dff0d8;
+  border-color: #b5dca5;
+}
+
+.bs-callout-danger h4 {
+  color: #B94A48;
+}
+
+.bs-callout-warning h4 {
+  color: #C09853;
+}
+
+.bs-callout-info h4 {
+  color: #3A87AD;
+}
+
+.bs-callout-success h4 {
+  color: #3c763d;
+}
+
+.bs-callout.pre {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.9, 0.9); opacity: 1.0;}
+    50% {opacity: 0.0;}
+    100% {-webkit-transform: scale(1.1, 1.1); opacity: 1.0;}
+}

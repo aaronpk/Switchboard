@@ -48,3 +48,7 @@ function feed_from_url($url) {
 function get_by_id($table, $id) {
   return ORM::for_table($table)->where('id', $id)->find_one();
 }
+
+function get_by_col($table, $col, $val) {
+  return ORM::for_table($table)->where($col, $val)->find_one();
+}

@@ -33,6 +33,8 @@ class PushTask {
 
       $response = request\get_url($url, true);
 
+      $subscription->challenge_response = $response['headers']."\n\n".$response['body'];
+
       if(request\response_is($response['status'], 2) && $response['body'] == $subscription->challenge) {
         // The subscriber replied with a 2xx status code and confirmed the challenge string.
         // The subscription is confirmed and active.
@@ -41,12 +43,13 @@ class PushTask {
         $subscription->date_expires = $exp_date;
         db\set_updated($subscription);
         $subscription->active = 1;
-        $subscription->save();
 
       } else {
         // The subscriber did not confirm the subscription, so reject it
 
       }
+
+      $subscription->save();
 
       print_r($response);
 
