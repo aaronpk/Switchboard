@@ -1,7 +1,7 @@
 <div class="narrow">
 
   <div class="jumbotron h-x-app">
-    <h1><img src="/images/icons/apple-icon-144x144.png" height="72" style="margin-bottom: 13px;" class="u-logo p-name" alt="Switchboard"> Switchboard</h1>
+    <h1><img src="/images/switchboard-logo.png" height="72" style="margin-bottom: 13px;" class="u-logo p-name" alt="Switchboard"> Switchboard</h1>
 
     <p class="tagline p-summary">Switchboard is a PubSubHubbub 0.4 hub.</p>
 
