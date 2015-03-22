@@ -1,14 +1,19 @@
 body {
   padding-top: 10px;
   background: #fff;
+  background: url(/images/bkg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 40px;
 }
 
 body.logged-out {
   background: white;
 }
-.logged-out .jumbotron {
-  background-color: #fffbeb;
-  border: 1px #fff2bc solid;
+.jumbotron {
+  border: 1px #bbb solid;
 }
 
 .header {
@@ -33,7 +38,7 @@ body.logged-out {
   color: #999;
   background-color: #f9f9f9;
   border-top: 1px #e5e5e5 solid;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -45,7 +50,7 @@ body.logged-out {
 }
 
 .footer .credits {
-  padding: 20px;
+  padding: 10px;
   font-size: 12px;
 }
 

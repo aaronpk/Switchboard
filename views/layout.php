@@ -55,7 +55,7 @@
 
   <div class="footer">
     <p class="credits">
-      This code is <a href="https://github.com/aaronpk/Switchboard">open source</a>. 
+      Switchboard is made by <a href="http://aaronparecki.com/">Aaron Parecki</a> and is <a href="https://github.com/aaronpk/Switchboard">open source</a>. 
       Feel free to send a pull request, or <a href="https://github.com/aaronpk/Switchboard/issues">file an issue</a>.
     </p>
   </div>
