@@ -1,3 +1,5 @@
+<div class="narrow">
+
 <? if($this->subscription->active): ?>
   <div class="bs bs-callout bs-callout-success">This subscription is active!</div>
 <? else: ?>
@@ -34,3 +36,5 @@
 
 
 </table>
+
+</div>

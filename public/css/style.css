@@ -26,9 +26,11 @@ body.logged-out {
 }
 
 .narrow {
+  background: #fff;
   max-width: 700px;
   margin-right: auto;
-  margin-left: auto;  
+  margin-left: auto;
+  padding: 10px;
 }
 
 .footer {
