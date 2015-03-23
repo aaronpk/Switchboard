@@ -64,14 +64,14 @@ body.logged-out {
   font-size: 18px;
 }
 
-.subscription-status {
+.subscription-status, .feed-status {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   border: 1px #ccc solid;
 }
 
-.subscription-status pre {
+.subscription-status pre, .feed-status pre {
   max-width: 500px;
   overflow: pre-wrap;
 }
