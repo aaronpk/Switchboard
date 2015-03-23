@@ -13,12 +13,28 @@ $app->get('/callback-success', function() use($app) {
   $app->response()->status(200);
   echo $params['hub_challenge'];
 });
+$app->post('/callback-success', function() use($app) {
+  $params = $app->request()->params();
+  $app->response()->status(200);
+});
 
 $app->get('/callback-fail', function() use($app) {
   $params = $app->request()->params();
   $app->response()->status(404);
 });
 ///////////////////////////////////////////////////////////////
+
+function verify_push_topic_url($topic, &$app) {
+  // If we've already seen the topic, assume it's valid and don't check it again
+  if(!db\feed_from_url($topic)) {
+    $topic_head = request\get_head($topic);
+    if($topic_head && !request\response_is($topic_head['status'], 2)) {
+      push_error($app, "The topic URL returned a " . $topic_head['status'] . " status code");
+    } else {
+      push_error($app, 'We tried to verify the topic URL exists but it didn\'t respond to a HEAD request.');
+    }
+  }
+}
 
 
 $app->post('/', function() use($app) {
@@ -41,15 +57,7 @@ $app->post('/', function() use($app) {
       }
 
       if($mode == 'subscribe') {
-        // If we've already seen the topic, assume it's valid and don't check it again
-        if(!db\feed_from_url($topic)) {
-          $topic_head = request\get_head($topic);
-          if($topic_head && !request\response_is($topic_head['status'], 2)) {
-            push_error($app, "The topic URL returned a " . $topic_head['status'] . " status code");
-          } else {
-            push_error($app, 'We tried to verify the topic URL exists but it didn\'t respond to a HEAD request.');
-          }
-        }
+        verify_push_topic_url($topic, $app);
 
         // Find or create the feed given the topic URL
         $feed = db\find_or_create('feeds', ['feed_url'=>$topic], [
@@ -63,6 +71,7 @@ $app->post('/', function() use($app) {
         // Always set a new requested date and challenge
         $subscription->date_requested = db\now();
         $subscription->challenge = db\random_hash();
+        db\set_updated($subscription);
         $subscription->save();
 
         // Queue the worker to validate the subscription
@@ -89,9 +98,37 @@ $app->post('/', function() use($app) {
 
       break;
 
+    case 'publish':
+
+      // Sanity check the request params
+      $url = k($params, 'hub_url');
+
+      if(!is_valid_push_url($url)) {
+        push_error($app, 'URL was invalid');
+      }
+
+      verify_push_topic_url($url, $app);
+
+      // Find or create the feed given the topic URL
+      $feed = db\find_or_create('feeds', ['feed_url'=>$url], [
+        'hash' => db\random_hash(),
+      ], true);
+
+      $num_subscribers = ORM::for_table('subscriptions')->where('feed_id', $feed->id)->where('active', 1)->count();
+
+      $feed->push_last_ping_received = db\now();
+      db\set_updated($feed);
+      $feed->save();
+
+      // Queue the worker to ping all the subscribers about the new content
+      DeferredTask::queue('PushTask', 'publish', $feed->id);
+
+      $app->response()->status(202);
+      echo "There are currently $num_subscribers active subscriptions for this feed.\n";
+      echo "The hub is checking the feed for new content and notifying the subscribers.\nCheck the status here:\n";
+      echo Config::$base_url . '/feed/' . $feed->hash . "\n";
 
       break;
   }
-
 
 });

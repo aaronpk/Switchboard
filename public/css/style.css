@@ -71,6 +71,10 @@ body.logged-out {
   border: 1px #ccc solid;
 }
 
+.subscription-status pre {
+  max-width: 500px;
+  overflow: pre-wrap;
+}
 
 /**
  * Bootstrap callouts
