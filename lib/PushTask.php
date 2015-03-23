@@ -47,6 +47,7 @@ class PushTask {
           echo "Subscriber verified the request and is now subscribed\n";
         } else {
           $subscription->date_unsubscribed = db\now();
+          $subscription->date_expires = null;
           $subscription->active = 0;
           echo "Subscriber verified the request and is now unsubscribed\n";
         }

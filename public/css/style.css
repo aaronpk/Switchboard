@@ -64,6 +64,13 @@ body.logged-out {
   font-size: 18px;
 }
 
+.subscription-status {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px #ccc solid;
+}
+
 
 /**
  * Bootstrap callouts
