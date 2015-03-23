@@ -41,6 +41,17 @@ function find_or_create($table, $where, $defaults, $autosave=false) {
   return $item;
 }
 
+function find($table, $where) {
+  $item = ORM::for_table($table);
+
+  // Where is an associative array of key/val combos
+  foreach($where as $c=>$v) {
+    $item = $item->where($c, $v);
+  }
+
+  return $item->find_one();
+}
+
 function feed_from_url($url) {
   return ORM::for_table('feeds')->where('feed_url', $url)->find_one();
 }
