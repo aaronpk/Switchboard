@@ -1,4 +1,4 @@
-<?php $tz = -7 * 3600; ?>
+<?php $tz = 0; ?>
 <div class="narrow subscription-status">
 
 <? if($this->subscription->active): ?>
@@ -19,7 +19,7 @@
   </tr>
   <tr>
     <td>Date Subscription was Requested</td>
-    <td><?= friendly_date($this->subscription->date_requested, $tz) ?></td>
+    <td><?= format_date($this->subscription->date_requested, $tz) ?></td>
   </tr>
   <tr>
     <td>Subscription Verification Response<br>(from your server)</td>
@@ -27,18 +27,18 @@
   </tr>
   <tr>
     <td>Date Subscription was Confirmed</td>
-    <td><?= friendly_date($this->subscription->date_confirmed, $tz) ?></td>
+    <td><?= format_date($this->subscription->date_confirmed, $tz) ?></td>
   </tr>
   <? if($this->subscription->date_unsubscribed): ?>
     <tr>
       <td>Date Unsubscribed</td>
-      <td><?= friendly_date($this->subscription->date_unsubscribed, $tz) ?></td>
+      <td><?= format_date($this->subscription->date_unsubscribed, $tz) ?></td>
     </tr>
   <? endif; ?>
   <? if($this->subscription->date_expires): ?>
     <tr>
       <td>Subscription Expiration</td>
-      <td><?= friendly_date($this->subscription->date_expires, $tz) ?></td>
+      <td><?= format_date($this->subscription->date_expires, $tz) ?></td>
     </tr>
   <? endif; ?>
 
@@ -48,11 +48,11 @@
 <table class="table">
   <tr>
     <td>Last ping received from publisher</td>
-    <td><?= friendly_date($this->feed->push_last_ping_received, $tz) ?></td>
+    <td><?= format_date($this->feed->push_last_ping_received, $tz) ?></td>
   </tr>
   <tr>
     <td>Last ping sent to subscriber</td>
-    <td><?= friendly_date($this->subscription->date_last_ping_sent, $tz) ?></td>
+    <td><?= format_date($this->subscription->date_last_ping_sent, $tz) ?></td>
   </tr>
   <tr>
     <td>Last Response<br>(from your server)</td>

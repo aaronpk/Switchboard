@@ -23,6 +23,19 @@ function friendly_date($date_string, $tz_offset) {
   return $date->format('F j, Y H:i:s') . ' ' . $tz;
 }
 
+function format_date($date_string, $tz_offset) {
+  if(!$date_string)
+    return '';
+
+  $date = new DateTime($date_string);
+  if($tz_offset > 0)
+    $date->add(new DateInterval('PT'.$tz_offset.'S'));
+  elseif($tz_offset < 0)
+    $date->sub(new DateInterval('PT'.abs($tz_offset).'S'));
+  $tz = ($tz_offset < 0 ? '-' : '+') . sprintf('%02d:%02d', abs($tz_offset/60/60), ($tz_offset/60)%60);
+  return $date->format('Y-m-d H:i:s') . ' ' . $tz;
+}
+
 function build_url($parsed_url) { 
   $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : ''; 
   $host     = isset($parsed_url['host']) ? $parsed_url['host'] : ''; 

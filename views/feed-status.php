@@ -1,4 +1,4 @@
-<?php $tz = -7 * 3600; ?>
+<?php $tz = 0; ?>
 <div class="narrow subscription-status">
 
 <h3>Feed Status</h3>
@@ -9,11 +9,11 @@
   </tr>
   <tr>
     <td>Last Ping Received</td>
-    <td><?= friendly_date($this->feed->push_last_ping_received, $tz) ?></td>
+    <td><?= format_date($this->feed->push_last_ping_received, $tz) ?></td>
   </tr>
   <tr>
     <td>Last Retrieved</td>
-    <td><?= friendly_date($this->feed->last_retrieved, $tz) ?></td>
+    <td><?= format_date($this->feed->last_retrieved, $tz) ?></td>
   </tr>
 </table>
 
@@ -32,19 +32,19 @@
   </tr>
   <tr>
     <td>Date Subscribed</td>
-    <td><?= friendly_date($subscriber->date_created, $tz) ?></td>
+    <td><?= format_date($subscriber->date_created, $tz) ?></td>
   </tr>
   <tr>
     <td>Last Confirmed</td>
-    <td><?= friendly_date($subscriber->date_confirmed, $tz) ?></td>
+    <td><?= format_date($subscriber->date_confirmed, $tz) ?></td>
   </tr>
   <tr>
     <td>Date Expires</td>
-    <td><?= friendly_date($subscriber->date_expires, $tz) ?></td>
+    <td><?= format_date($subscriber->date_expires, $tz) ?></td>
   </tr>
   <tr>
     <td>Last Ping Sent</td>
-    <td><?= friendly_date($subscriber->date_last_ping_sent, $tz) ?></td>
+    <td><?= format_date($subscriber->date_last_ping_sent, $tz) ?></td>
   </tr>
   <tr>
     <td>Last Response<br>(from subscriber)</td>
