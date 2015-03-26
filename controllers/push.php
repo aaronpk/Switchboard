@@ -30,7 +30,7 @@ function verify_push_topic_url($topic, &$app) {
     $topic_head = request\get_head($topic);
     if($topic_head && !request\response_is($topic_head['status'], 2)) {
       push_error($app, "The topic URL returned a " . $topic_head['status'] . " status code");
-    } else {
+    } elseif(!$topic_head) {
       push_error($app, 'We tried to verify the topic URL exists but it didn\'t respond to a HEAD request.');
     }
   }
