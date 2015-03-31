@@ -2,12 +2,10 @@
 
 $app->get('/', function() use($app) {
   $res = $app->response();
-  ob_start();
-  render('index', array(
+  $html = render('index', array(
     'title'        => 'Switchboard',
     'meta'         => ''
   ));
-  $html = ob_get_clean();
   $res->body($html);
 });
 
@@ -20,14 +18,12 @@ $app->get('/subscription/:hash', function($hash) use($app) {
   if(!$subscription) {
     $app->response()->status(404);
   } else {
-    ob_start();
-    render('subscription-status', array(
+    $html = render('subscription-status', array(
       'title'        => 'Switchboard',
       'meta'         => '',
       'subscription' => $subscription,
       'feed'         => $feed
     ));
-    $html = ob_get_clean();
     $res->body($html);
   }
 });
@@ -42,15 +38,13 @@ $app->get('/feed/:hash', function($hash) use($app) {
   if(!$feed) {
     $app->response()->status(404);
   } else {
-    ob_start();
-    render('feed-status', array(
+    $html = render('feed-status', array(
       'title'        => 'Switchboard',
       'meta'         => '',
       'feed'         => $feed,
       'subscribers'  => $subscribers,
       'num_subscribers' => $num_subscribers
     ));
-    $html = ob_get_clean();
     $res->body($html);
   }
 });

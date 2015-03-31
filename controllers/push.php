@@ -49,7 +49,7 @@ $app->post('/', function() use($app) {
       $callback = k($params, 'hub_callback');
 
       if(!is_valid_push_url($topic)) {
-        push_error($app, 'Topic URL was invalid');
+        push_error($app, 'Topic URL was invalid ('.$topic.')');
       }
 
       if(!is_valid_push_url($callback)) {
@@ -102,6 +102,12 @@ $app->post('/', function() use($app) {
 
       // Sanity check the request params
       $url = k($params, 'hub_url');
+      if(!$url)
+        $url = k($params, 'hub_topic');
+
+      if(!$url) {
+        push_error($app, 'No URL was specified. When publishing, send the topic URL in a parameter named hub.topic');
+      }
 
       if(!is_valid_push_url($url)) {
         push_error($app, 'URL was invalid');

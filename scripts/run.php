@@ -1,7 +1,7 @@
 <?php
 declare(ticks=1);
 
-chdir('..');
+chdir(__DIR__.'/..');
 
 $mode = 'run';
 if(array_key_exists(1, $argv) && $argv[1] == 'once')
