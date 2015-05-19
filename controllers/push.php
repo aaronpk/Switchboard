@@ -52,7 +52,11 @@ $app->post('/', function() use($app) {
     case 'unsubscribe':
 
       // Sanity check the request params
-      $topic = push_param($params, 'topic');
+      $topic = push_param($params, 'url');
+      // Support subscribing using either "url" or "topic" parameters
+      if(!$topic) {
+        $topic = push_param($params, 'topic');
+      }
       $callback = push_param($params, 'callback');
 
       if(!$topic) {
