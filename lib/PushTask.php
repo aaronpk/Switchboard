@@ -14,13 +14,19 @@ class PushTask {
       $exp_ts = time() + $lease_seconds;
       $exp_date = date('Y-m-d H:i:s', $exp_ts);
 
+      if($feed->namespaced) {
+        $prefix = 'hub.';
+      } else {
+        $prefix = '';
+      }
+
       $push_params = [
-        'hub.mode' => ($mode == 'subscribe' ? 'subscribe' : 'unsubscribe'),
-        'hub.topic' => $feed->feed_url,
-        'hub.challenge' => $subscription->challenge
+        $prefix.'mode' => ($mode == 'subscribe' ? 'subscribe' : 'unsubscribe'),
+        $prefix.'topic' => $feed->feed_url,
+        $prefix.'challenge' => $subscription->challenge
       ];
       if($mode == 'subscribe') {
-        $push_params['hub.lease_seconds'] = $lease_seconds;
+        $push_params[$prefix.'lease_seconds'] = $lease_seconds;
       }
 
       $url = parse_url($subscription->callback_url);

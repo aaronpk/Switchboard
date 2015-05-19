@@ -75,6 +75,8 @@ $app->post('/', function() use($app) {
         push_error($app, 'Callback URL was invalid');
       }
 
+      $namespaced = k($params, 'hub_mode') ? 1 : 0; // set namespaced=1 if they used hub_mode in the request
+
       if($mode == 'subscribe') {
         verify_push_topic_url($topic, $app);
 
@@ -90,6 +92,7 @@ $app->post('/', function() use($app) {
         // Always set a new requested date and challenge
         $subscription->date_requested = db\now();
         $subscription->challenge = db\random_hash();
+        $subscription->namespaced = $namespaced;
         db\set_updated($subscription);
         $subscription->save();
 
