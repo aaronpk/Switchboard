@@ -6,6 +6,13 @@ function push_error(&$app, $msg) {
   die();
 }
 
+function push_param($params, $name) {
+  // Look 'mode' first, fall back to 'hub_mode'
+  if(k($params, $name))
+    return k($params, $name);
+  return k($params, 'hub_'.$name);
+}
+
 ///////////////////////////////////////////////////////////////
 // These are just test routes
 $app->get('/callback-success', function() use($app) {
@@ -40,13 +47,21 @@ function verify_push_topic_url($topic, &$app) {
 $app->post('/', function() use($app) {
   $params = $app->request()->params();
 
-  switch($mode=k($params, 'hub_mode')) {
+  switch($mode=push_param($params, 'mode')) {
     case 'subscribe':
     case 'unsubscribe':
 
       // Sanity check the request params
-      $topic = k($params, 'hub_topic');
-      $callback = k($params, 'hub_callback');
+      $topic = push_param($params, 'topic');
+      $callback = push_param($params, 'callback');
+
+      if(!$topic) {
+        push_error($app, 'No topic URL was specified. Send the topic URL in a parameter named "topic"');
+      }
+
+      if(!$callback) {
+        push_error($app, 'No callback URL was specified. Send the callback URL in a parameter named "callback"');
+      }
 
       if(!is_valid_push_url($topic)) {
         push_error($app, 'Topic URL was invalid ('.$topic.')');
@@ -101,12 +116,14 @@ $app->post('/', function() use($app) {
     case 'publish':
 
       // Sanity check the request params
-      $url = k($params, 'hub_url');
-      if(!$url)
-        $url = k($params, 'hub_topic');
+      $url = push_param($params, 'url');
+      // Allow publishers to use either "url" or "topic" to indicate the URL that changed
+      if(!$url) {
+        $url = push_param($params, 'topic');
+      }
 
       if(!$url) {
-        push_error($app, 'No URL was specified. When publishing, send the topic URL in a parameter named hub.topic');
+        push_error($app, 'No URL was specified. When publishing, send the topic URL in a parameter named "url"');
       }
 
       if(!is_valid_push_url($url)) {
