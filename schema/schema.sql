@@ -1,0 +1,41 @@
+CREATE TABLE `subscriptions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `hash` varchar(100) DEFAULT NULL,
+  `feed_id` bigint(20) DEFAULT NULL,
+  `callback_url` text,
+  `challenge` varchar(100) DEFAULT '',
+  `active` tinyint(4) DEFAULT '0',
+  `namespaced` tinyint(4) DEFAULT '1',
+  `lease_seconds` int(11) DEFAULT NULL,
+  `date_requested` datetime DEFAULT NULL,
+  `challenge_response` text,
+  `date_confirmed` datetime DEFAULT NULL,
+  `date_expires` datetime DEFAULT NULL,
+  `date_unsubscribed` datetime DEFAULT NULL,
+  `date_last_ping_sent` datetime DEFAULT NULL,
+  `last_ping_status` int(11) DEFAULT NULL,
+  `last_ping_headers` text,
+  `last_ping_body` text,
+  `last_ping_success` tinyint(4) DEFAULT NULL,
+  `last_ping_error_delay` int(11) NOT NULL DEFAULT '0',
+  `date_created` datetime DEFAULT NULL,
+  `date_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `feed_id` (`feed_id`),
+  KEY `hash` (`hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `feeds` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `hash` varchar(190) DEFAULT NULL,
+  `feed_url` text NOT NULL,
+  `feed_type` enum('mf2','atom','rss') DEFAULT NULL,
+  `push_last_ping_received` datetime DEFAULT NULL,
+  `content_hash` varchar(255) DEFAULT NULL,
+  `last_retrieved` datetime DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `date_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `hash` (`hash`),
+  KEY `url` (`feed_url`(190))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
