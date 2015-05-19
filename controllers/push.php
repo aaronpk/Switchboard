@@ -120,40 +120,47 @@ $app->post('/', function() use($app) {
     case 'publish':
 
       // Sanity check the request params
-      $url = push_param($params, 'url');
+      $urls = push_param($params, 'url');
       // Allow publishers to use either "url" or "topic" to indicate the URL that changed
-      if(!$url) {
-        $url = push_param($params, 'topic');
+      if(!$urls) {
+        $urls = push_param($params, 'topic');
       }
 
-      if(!$url) {
+      if(!$urls) {
         push_error($app, 'No URL was specified. When publishing, send the topic URL in a parameter named "url"');
       }
 
-      if(!is_valid_push_url($url)) {
-        push_error($app, 'URL was invalid');
+      if(!is_array($urls)) {
+        $urls = array($urls);
       }
 
-      verify_push_topic_url($url, $app);
+      foreach($urls as $url) {
+        if(!is_valid_push_url($url)) {
+          push_error($app, 'URL was invalid');
+        }
 
-      // Find or create the feed given the topic URL
-      $feed = db\find_or_create('feeds', ['feed_url'=>$url], [
-        'hash' => db\random_hash(),
-      ], true);
+        verify_push_topic_url($url, $app);
 
-      $num_subscribers = ORM::for_table('subscriptions')->where('feed_id', $feed->id)->where('active', 1)->count();
+        // Find or create the feed given the topic URL
+        $feed = db\find_or_create('feeds', ['feed_url'=>$url], [
+          'hash' => db\random_hash(),
+        ], true);
 
-      $feed->push_last_ping_received = db\now();
-      db\set_updated($feed);
-      $feed->save();
+        $num_subscribers = ORM::for_table('subscriptions')->where('feed_id', $feed->id)->where('active', 1)->count();
 
-      // Queue the worker to ping all the subscribers about the new content
-      DeferredTask::queue('PushTask', 'publish', $feed->id);
+        $feed->push_last_ping_received = db\now();
+        db\set_updated($feed);
+        $feed->save();
 
-      $app->response()->status(202);
-      echo "There are currently $num_subscribers active subscriptions for this feed.\n";
-      echo "The hub is checking the feed for new content and notifying the subscribers.\nCheck the status here:\n";
-      echo Config::$base_url . '/feed/' . $feed->hash . "\n";
+        // Queue the worker to ping all the subscribers about the new content
+        DeferredTask::queue('PushTask', 'publish', $feed->id);
+
+        $app->response()->status(202);
+        echo "$url\n";
+        echo "There are currently $num_subscribers active subscriptions for this feed.\n";
+        echo "The hub is checking the feed for new content and notifying the subscribers.\nCheck the status here:\n";
+        echo Config::$base_url . '/feed/' . $feed->hash . "\n\n";
+      }
 
       break;
   }
