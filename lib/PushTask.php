@@ -10,7 +10,7 @@ class PushTask {
       $feed = db\get_by_id('feeds', $subscription->feed_id);
 
       // Choose the expiration for the subscription
-      $lease_seconds = 86400*3;
+      $lease_seconds = 86400*7 + 3600;
       $exp_ts = time() + $lease_seconds;
       $exp_date = date('Y-m-d H:i:s', $exp_ts);
 
