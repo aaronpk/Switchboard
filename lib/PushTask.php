@@ -10,11 +10,11 @@ class PushTask {
       $feed = db\get_by_id('feeds', $subscription->feed_id);
 
       // Choose the expiration for the subscription
-      $lease_seconds = 86400*3;
+      $lease_seconds = 86400*7 + 3600;
       $exp_ts = time() + $lease_seconds;
       $exp_date = date('Y-m-d H:i:s', $exp_ts);
 
-      if($feed->namespaced) {
+      if($subscription->namespaced) {
         $prefix = 'hub.';
       } else {
         $prefix = '';
@@ -29,6 +29,8 @@ class PushTask {
         $push_params[$prefix.'lease_seconds'] = $lease_seconds;
       }
 
+      echo "Verifying subscription to ".$feed->feed_url." for callback ".$subscription->callback_url."\n";
+
       $url = parse_url($subscription->callback_url);
       if($q=k($url, 'query')) {
         parse_str($q, $existing_params);
@@ -37,6 +39,7 @@ class PushTask {
       $url['query'] = http_build_query($push_params);
       $url = build_url($url);
 
+      echo "\t".$url."\n";
       $response = request\get_url($url, true);
 
       $subscription->challenge_response = $response['headers']."\n\n".$response['body'];
