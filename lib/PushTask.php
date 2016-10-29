@@ -93,7 +93,7 @@ class PushTask {
 
         $subscribers = ORM::for_table('subscriptions')->where('feed_id', $feed->id)->where('active', 1)->find_many();
         foreach($subscribers as $s) {
-          echo "Queuing notification for feed_id=$feed_id subscription_id=$s->id\n";
+          echo "Queuing notification for feed_id=$feed_id ($feed->feed_url) subscription_id=$s->id ($s->callback_url)\n";
           DeferredTask::queue('PushTask', 'notify_subscriber', [$feed_id, $s->id, db\now()]);
         }
 
