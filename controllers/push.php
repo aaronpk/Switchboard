@@ -155,14 +155,23 @@ $app->post('/', function() use($app) {
         db\set_updated($feed);
         $feed->save();
 
-        // Queue the worker to ping all the subscribers about the new content
-        DeferredTask::queue('PushTask', 'publish', $feed->id);
-
         $app->response()->status(202);
-        echo "$url\n";
-        echo "There are currently $num_subscribers active subscriptions for this feed.\n";
-        echo "The hub is checking the feed for new content and notifying the subscribers.\nCheck the status here:\n";
-        echo Config::$base_url . '/feed/' . $feed->hash . "\n\n";
+        if($num_subscribers > 0) {
+          // Queue the worker to ping all the subscribers about the new content
+          DeferredTask::queue('PushTask', 'publish', $feed->id);
+
+          $app->response()->body(
+            "$url\n".
+            "There are currently $num_subscribers active subscriptions for this feed.\n".
+            "The hub is checking the feed for new content and notifying the subscribers.\nCheck the status here:\n".
+            Config::$base_url . '/feed/' . $feed->hash . "\n\n"
+          );
+        } else {
+          $app->response()->body(
+            "$url\n".
+            "There are no active subscriptions for this feed.\n"
+          );
+        }
       }
 
       break;
