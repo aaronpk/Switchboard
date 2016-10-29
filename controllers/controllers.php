@@ -3,7 +3,16 @@
 $app->get('/', function() use($app) {
   $res = $app->response();
   $html = render('index', array(
-    'title'        => 'Switchboard',
+    'title'        => 'Switchboard - a PubSub Hub',
+    'meta'         => ''
+  ));
+  $res->body($html);
+});
+
+$app->get('/docs', function() use($app) {
+  $res = $app->response();
+  $html = render('docs', array(
+    'title'        => 'Switchboard Documentation',
     'meta'         => ''
   ));
   $res->body($html);
