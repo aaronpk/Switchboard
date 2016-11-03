@@ -149,43 +149,6 @@ function k($a, $k, $default=null) {
   }
 }
 
-function get_timezone($lat, $lng) {
-  try {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://atlas.p3k.io/api/timezone?latitude='.$lat.'&longitude='.$lng);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($ch);
-    $tz = @json_decode($response);
-    if($tz)
-      return new DateTimeZone($tz->timezone);
-  } catch(Exception $e) {
-    return null;
-  }
-  return null;
-}
-
-function micropub_post($endpoint, $params, $access_token, $h='entry') {
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $endpoint);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Authorization: Bearer ' . $access_token
-  ));
-  curl_setopt($ch, CURLOPT_POST, true);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array_merge(array(
-    'h' => $h
-  ), $params)));
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($ch, CURLOPT_HEADER, true);
-  $response = curl_exec($ch);
-  $error = curl_error($ch);
-  return array(
-    'response' => $response,
-    'error' => $error,
-    'curlinfo' => curl_getinfo($ch),
-    'status' => curl_getinfo($ch, CURLINFO_HTTP_CODE)
-  );
-}
-
 function relative_time($date) {
   static $rel;
   if(!isset($rel)) {
