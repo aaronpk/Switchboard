@@ -91,6 +91,13 @@ class PushTask {
       if($content_hash != $feed->content_hash) {
         $feed->content_hash = $content_hash;
 
+        $headers = request\parse_headers($response['headers']);
+        if(array_key_exists('Content-Type', $headers)) {
+          $feed->content_type = $headers['Content-Type'];
+        }
+        $feed->content = $response['body'];
+        $feed->save();
+
         $subscribers = ORM::for_table('subscriptions')->where('feed_id', $feed->id)->where('active', 1)->find_many();
         foreach($subscribers as $s) {
           echo "Queuing notification for feed_id=$feed_id ($feed->feed_url) subscription_id=$s->id ($s->callback_url)\n";
@@ -98,10 +105,9 @@ class PushTask {
         }
 
       } else {
+        $feed->save();
         echo "Feed body has the same content hash as last time, not notifying subscribers\n";
       }
-
-      $feed->save();
 
     } else {
       echo "Feed not found\n";
@@ -144,7 +150,9 @@ class PushTask {
     echo "Notifying subscriber!\n";
 
     $subscription->date_last_ping_sent = db\now();
-    $response = request\post($subscription->callback_url, []);
+    $response = request\post($subscription->callback_url, $feed->content, false, [
+      'Content-Type: ' . ($feed->content_type ?: 'text/plain')
+    ]);
     $subscription->last_ping_status = $response['status'];
     $subscription->last_ping_headers = $response['headers'];
     $subscription->last_ping_body = $response['body'];
