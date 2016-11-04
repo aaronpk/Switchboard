@@ -9,8 +9,7 @@
     <p><pre>&lt;link rel="self" href="https://example.com/"&gt;
 &lt;link rel="hub" href="https://switchboard.p3k.io/"&gt;</pre></p>
 
-    <p>When you add a new item to the feed, send a POST request to <code>https://switchboard.p3k.io/</code> with the following 
-      parameters:</p>
+    <p>When you add a new item to the feed, send a POST request to <code>https://switchboard.p3k.io/</code> with the following parameters:</p>
 
     <p>
       <ul>
@@ -19,8 +18,7 @@
       </ul>
     </p>
 
-    <p>Switchboard will send notifications to every subscriber that your feed has been updated. The request that Switchboard sends to your subscribers will be a POST request with no body. This is known as a "thin ping". Your subscribers will then request your feed to find updates.</p>
-
+    <p>Switchboard will fetch your page to confirm that it has changed since it last sent notifications, and then will send notifications to every active subscriber. The request that Switchboard sends to your subscribers will be a POST request, and the body will be the full contents of your page. This is known as a "fat ping". Your subscribers can parse the body of the notification the same way they would parse your page, or they might request your page directly to find updates.</p>
 
 
     <h2>Subscribing</h2>
@@ -46,7 +44,7 @@
 
     <p>When there is new content available from the topic URL, Switchboard will send a POST request to your callback URL.</p>
 
-    <p>This POST request will have no body, and is meant to be an indication that the URL has been updated, and that you can fetch the new contents from there.</p>
+    <p>The POST request body will be the exact contents available at the topic URL. Switchboard fetches the HTML immediately so this value can be guaranteed to be "fresh" and not cached. You can parse this body the same way you would have parsed the contents of fetching the topic URL itself. The content type of the request will match the content type of the topic URL.</p>
 
 
   </div>

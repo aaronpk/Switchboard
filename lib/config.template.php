@@ -1,8 +1,6 @@
 <?php
 class Config {
   public static $base_url = 'https://example.com';
-  public static $hostname = 'example.com';
-  public static $ssl = false;
 
   public static $dbHost = '127.0.0.1';
   public static $dbName = 'switchboard';
