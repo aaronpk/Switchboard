@@ -6,6 +6,7 @@ function get_url($url, $include_headers=false) {
   set_user_agent($ch);
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 5);
   if($include_headers) {
     curl_setopt($ch, CURLOPT_HEADER, true);
     $response = curl_exec($ch);
@@ -27,6 +28,7 @@ function get_head($url) {
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_HEADER, true);
   curl_setopt($ch, CURLOPT_NOBODY, true);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 5);
   $headers = curl_exec($ch);
   return [
     'status' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
@@ -51,6 +53,7 @@ function post($url, $params, $format='form', $headers=[]) {
   curl_setopt($ch, CURLOPT_POST, true);
   curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
   curl_setopt($ch, CURLOPT_HEADER, true);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 5);
   $response = curl_exec($ch);
   $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
   return [

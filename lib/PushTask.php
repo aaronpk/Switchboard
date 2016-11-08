@@ -81,8 +81,16 @@ class PushTask {
     $feed = db\get_by_id('feeds', $feed_id);
     if($feed) {
 
+      echo $feed->feed_url."\n";
+      echo "Checking feed for updates...\n";
+
       // First check the feed to see if the content has changed since the last time we checked
       $response = request\get_url($feed->feed_url, true);
+
+      if($response['code'] != 200) {
+        echo "Feed did not return HTTP 200: ".$response['code'].". Skipping publish.\n";
+        return;
+      }
 
       $feed->last_retrieved = db\now();
       db\set_updated($feed);
@@ -102,6 +110,9 @@ class PushTask {
         foreach($subscribers as $s) {
           echo "Queuing notification for feed_id=$feed_id ($feed->feed_url) subscription_id=$s->id ($s->callback_url)\n";
           DeferredTask::queue('PushTask', 'notify_subscriber', [$feed_id, $s->id, db\now()]);
+        }
+        if(count($subscribers) == 0) {
+          echo "No active subscribers\n";
         }
 
       } else {
