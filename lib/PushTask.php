@@ -87,8 +87,8 @@ class PushTask {
       // First check the feed to see if the content has changed since the last time we checked
       $response = request\get_url($feed->feed_url, true);
 
-      if($response['code'] != 200) {
-        echo "Feed did not return HTTP 200: ".$response['code'].". Skipping publish.\n";
+      if($response['status'] != 200) {
+        echo "Feed did not return HTTP 200: ".$response['status'].". Skipping publish.\n";
         return;
       }
 
