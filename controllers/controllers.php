@@ -3,7 +3,7 @@
 $app->get('/', function() use($app) {
   $res = $app->response();
   $html = render('index', array(
-    'title'        => 'Switchboard - a PubSub Hub',
+    'title'        => 'Switchboard - a WebSub Hub',
     'meta'         => ''
   ));
   $res->body($html);

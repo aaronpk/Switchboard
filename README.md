@@ -1,7 +1,7 @@
 Switchboard
 ===========
 
-Switchboard is a PubSubHubbub 4.0 Hub
+Switchboard is a WebSub Hub
 
 
 Credits
