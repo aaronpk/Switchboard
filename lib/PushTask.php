@@ -160,10 +160,17 @@ class PushTask {
 
     echo "Notifying subscriber!\n";
 
-    $subscription->date_last_ping_sent = db\now();
-    $response = request\post($subscription->callback_url, $feed->content, false, [
+    $headers = [
       'Content-Type: ' . ($feed->content_type ?: 'text/plain')
-    ]);
+    ];
+
+    if($subscription->secret) {
+      $signature = hash_hmac('sha256', $feed->content, $subscription->secret);
+      $headers[] = 'X-Hub-Signature: sha256=' . $signature;
+    }
+
+    $subscription->date_last_ping_sent = db\now();
+    $response = request\post($subscription->callback_url, $feed->content, false, $headers);
     $subscription->last_ping_status = $response['status'];
     $subscription->last_ping_headers = $response['headers'];
     $subscription->last_ping_body = $response['body'];

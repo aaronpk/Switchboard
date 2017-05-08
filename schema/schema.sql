@@ -4,6 +4,7 @@ CREATE TABLE `subscriptions` (
   `feed_id` bigint(20) DEFAULT NULL,
   `callback_url` text,
   `challenge` varchar(100) DEFAULT '',
+  `secret` varchar(200) DEFAULT '',
   `active` tinyint(4) DEFAULT '0',
   `namespaced` tinyint(4) DEFAULT '1',
   `lease_seconds` int(11) DEFAULT NULL,

@@ -7,7 +7,7 @@ function push_error(&$app, $msg) {
 }
 
 function push_param($params, $name) {
-  // Look 'mode' first, fall back to 'hub_mode'
+  // Look for 'mode' first, fall back to 'hub_mode'
   if(k($params, $name))
     return k($params, $name);
   return k($params, 'hub_'.$name);
@@ -93,6 +93,9 @@ $app->post('/', function() use($app) {
         $subscription->date_requested = db\now();
         $subscription->challenge = db\random_hash();
         $subscription->namespaced = $namespaced;
+        if($secret=push_param($params, 'secret')) {
+          $subscription->secret = $secret;
+        }
         db\set_updated($subscription);
         $subscription->save();
 
