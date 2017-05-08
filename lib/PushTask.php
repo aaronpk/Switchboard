@@ -161,7 +161,8 @@ class PushTask {
     echo "Notifying subscriber!\n";
 
     $headers = [
-      'Content-Type: ' . ($feed->content_type ?: 'text/plain')
+      'Content-Type: ' . ($feed->content_type ?: 'text/plain'),
+      'Link: <' . Config::$base_url . '/>; rel="hub", <' . $feed->feed_url . '>; rel="self"',
     ];
 
     if($subscription->secret) {
