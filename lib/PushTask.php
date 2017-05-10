@@ -181,6 +181,14 @@ class PushTask {
     if(request\response_is($response['status'], 2)) {
       $subscription->last_ping_success = 1;
       $subscription->last_ping_error_delay = 0;
+    } elseif($response['status'] == 410) {
+      // If the subscriber returns HTTP 410, then take that as an indication that they no longer want more notifications and deactivate this subscription
+      // https://github.com/w3c/websub/issues/106
+      // https://github.com/w3c/websub/issues/103
+      echo "Deactivating subscription based on HTTP 410 response returned\n";
+      $subscription->last_ping_success = 0;
+      $subscription->active = 0;
+
     } else {
       $subscription->last_ping_success = 0;
       // If the ping failed, queue another ping for a later time with exponential backoff
