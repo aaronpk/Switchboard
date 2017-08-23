@@ -14,7 +14,7 @@
     <p>
       <ul>
         <li><code>hub.mode=publish</code></li>
-        <li><code>hub.topic=https://example.com/</code></li>
+        <li><code>hub.url=https://example.com/</code></li>
       </ul>
     </p>
 
@@ -45,7 +45,6 @@
     <p>When there is new content available from the topic URL, Switchboard will send a POST request to your callback URL.</p>
 
     <p>The POST request body will be the exact contents available at the topic URL. Switchboard fetches the HTML immediately so this value can be guaranteed to be "fresh" and not cached. You can parse this body the same way you would have parsed the contents of fetching the topic URL itself. The content type of the request will match the content type of the topic URL.</p>
-
 
   </div>
 
