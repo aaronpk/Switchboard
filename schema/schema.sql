@@ -33,6 +33,8 @@ CREATE TABLE `feeds` (
   `feed_type` enum('mf2','atom','rss') DEFAULT NULL,
   `push_last_ping_received` datetime DEFAULT NULL,
   `content_hash` varchar(255) DEFAULT NULL,
+  `content_type` varchar(255) DEFAULT NULL,
+  `content` longblob,
   `last_retrieved` datetime DEFAULT NULL,
   `date_created` datetime DEFAULT NULL,
   `date_updated` datetime DEFAULT NULL,

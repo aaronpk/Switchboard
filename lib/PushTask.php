@@ -101,7 +101,10 @@ class PushTask {
 
         $headers = request\parse_headers($response['headers']);
         if(array_key_exists('Content-Type', $headers)) {
-          $feed->content_type = $headers['Content-Type'];
+          if(is_array($headers['Content-Type']))
+            $feed->content_type = $headers['Content-Type'][0];
+          else
+            $feed->content_type = $headers['Content-Type'];
         }
         $feed->content = $response['body'];
         $feed->save();

@@ -19,9 +19,6 @@ $pcntl_continue = TRUE;
 
 define('PDO_SUPPORT_DELAYED', TRUE);
 
-// TODO: add support for forking and running many workers in parallel
-// e.g. `php run.php 10`
-
 require 'vendor/autoload.php';
 
 if($mode == 'once') {
